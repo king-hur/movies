@@ -1,8 +1,12 @@
-# React + Vite
+# Figma
+- https://www.figma.com/design/sSzZXbrmG8g7Fv613drOfi/Movies-Search?node-id=0-1&node-type=canvas&t=Zwk7MHdbt9N84Ei5-0
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Useful stuff 
+- https://rapidapi.com/rapidapi/api/movie-database-alternative/playground/apiendpoint_19019426-1f2d-467a-8e67-80f62266eac1
 
-Currently, two official plugins are available:
+# Action Items
+- design frontend and functionality
+- filter for movies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Stretch goals
+- type incoming data from API using zod

@@ -1,36 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [search, setSearch] = useState('');
+  const [results, setResults] = useState([]);
+
+  const getResults = async (e) => {
+    e.preventDefault();
+    const searchVal = e.target.searchField.value;
+    setSearch(searchVal);
+    const url = `https://movie-database-alternative.p.rapidapi.com/?s=${encodeURI(
+      searchVal
+    )}&r=json&page=1`;
+    const options = {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key': import.meta.env.VITE_MOVIE_RAPIDAPI_KEY,
+        'x-rapidapi-host': import.meta.env.VITE_MOVIE_RAPIDAPI_HOST,
+      },
+    };
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok)
+        throw new Error('There was an error with fetching the data');
+
+      const result = await response.json();
+      console.log(result);
+      if (result.Response === 'True') {
+        setResults(result.Search);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <div>hi jenny</div>
+      <h1 className='text-4xl'>King and Jenny&lsquo;s Movie List</h1>
+      <form onSubmit={getResults}>
+        <input type='text' name='searchField' />
+        <button type='submit'>Search</button>
+      </form>
+
+      <div>Results for: {search}</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Movies</th>
+            <th>Year</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          {results.map((item, index) => (
+            <tr key={index}>
+              <td><a href={`https://www.imdb.com/title/${item.imdbID}`}>{item.Title}</a></td>
+              <td>{item.Year}</td>
+              <td><img src={item.Poster} /></td>
+              
+              
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
