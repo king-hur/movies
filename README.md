@@ -7,6 +7,10 @@
 # Action Items
 - design frontend and functionality
 - filter for movies
+- checkbox to add to list 
+- attach database
+
 
 # Stretch goals
 - type incoming data from API using zod
+- multiple lists
