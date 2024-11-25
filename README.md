@@ -11,7 +11,8 @@
 - design frontend and functionality
 - filter for movies
 - checkbox to add to list 
-- attach database
+- [x] attach database
+- link frontend to database functionality
 
 
 # Stretch goals
